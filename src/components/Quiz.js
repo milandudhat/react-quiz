@@ -11,51 +11,35 @@ import { Paper } from '@mui/material';
 import { Typography } from '@mui/material';
 
 export default function Quiz() {
-    const questions = [
-        {
-            questionText: "What is the capital of France?",
-            answerOptions: [
-                { answerText: "New York", isCorrect: false },
-                { answerText: "London", isCorrect: false },
-                { answerText: "Paris", isCorrect: true },
-                { answerText: "Dublin", isCorrect: false },
-            ],
+    const questions = 
+    [ {
+          question: 'What is the capital of France?',
+          options: ['Paris', 'Madrid', 'Rome', 'Berlin'],
+          answer: 'Paris'
         },
         {
-            questionText: "Who is CEO of Tesla?",
-            answerOptions: [
-                { answerText: "Jeff Bezos", isCorrect: false },
-                { answerText: "Elon Musk", isCorrect: true },
-                { answerText: "Bill Gates", isCorrect: false },
-                { answerText: "Tony Stark", isCorrect: false },
-            ],
+          question: 'What is the largest planet in the solar system?',
+          options: ['Jupiter', 'Saturn', 'Uranus', 'Neptune'],
+          answer: 'Jupiter'
         },
         {
-            questionText: "The iPhone was created by which company?",
-            answerOptions: [
-                { answerText: "Apple", isCorrect: true },
-                { answerText: "Intel", isCorrect: false },
-                { answerText: "Amazon", isCorrect: false },
-                { answerText: "Microsoft", isCorrect: false },
-            ],
+          question: 'What is the highest mountain in the world?',
+          options: ['Everest', 'Kilimanjaro', 'Denali', 'Aconcagua'],
+          answer: 'Everest'
         },
         {
-            questionText: "How many Harry Potter books are there?",
-            answerOptions: [
-                { answerText: "1", isCorrect: false },
-                { answerText: "4", isCorrect: false },
-                { answerText: "6", isCorrect: false },
-                { answerText: "7", isCorrect: true },
-            ],
-        },
+          question: 'Who wrote the Harry Potter series of books?',
+          options: ['J.K. Rowling', 'Stephen King', 'Dan Brown', 'George R.R. Martin'],
+          answer: 'J.K. Rowling'
+        }
     ];
 
     const [currentQuestion, setCurrentQuestion] = useState(0);
     const [showScore, setShowScore] = useState(false);
     const [score, setScore] = useState(0);
 
-    const handleAnswerButtonClick = (isCorrect) => {
-        if (isCorrect) {
+    const handleAnswerButtonClick = (answer) => {
+        if (answer === questions[currentQuestion].answer) {
             setScore(score + 1);
         }
 
@@ -113,7 +97,7 @@ export default function Quiz() {
                                                         marginTop: 3,
                                                         padding: 2,
                                                     }}>
-                                                        {currentQuestion + 1}) {questions[currentQuestion].questionText}
+                                                        {currentQuestion + 1}) {questions[currentQuestion].question}
                                                     </Typography>
                                                     <Typography variant="h5" component="h5" sx={{
                                                         marginTop: 3,
@@ -121,14 +105,14 @@ export default function Quiz() {
                                                         display: 'flex',
                                                         flexDirection: 'column'
                                                     }}>
-                                                        {questions[currentQuestion].answerOptions.map((answerOption) => (
+                                                        {questions[currentQuestion].options.map((option , index) => (
                                                             <Button
                                                                 sx={{
                                                                     border: "1px solid", margin: '6px 0', color: "white"
                                                                 }}
-                                                                key={answerOption.answerText}
-                                                                onClick={() => handleAnswerButtonClick(answerOption.isCorrect)}>
-                                                                {answerOption.answerText}
+                                                                key={index}
+                                                                onClick={() => handleAnswerButtonClick(option)}>
+                                                                {option}
                                                             </Button>
                                                         ))}
                                                     </Typography>
